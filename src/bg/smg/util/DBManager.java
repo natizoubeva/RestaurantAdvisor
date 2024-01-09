@@ -21,7 +21,7 @@ public class DBManager {
 
     DBManager() throws SQLException {
         MariaDbDataSource dataSource = new MariaDbDataSource();
-        dataSource.setUrl("jdbc:mariadb://localhost:3306/bank_ms");
+        dataSource.setUrl("jdbc:mariadb://localhost:3306/restaurant_advisor");
         dataSource.setUser("root");
         dataSource.setPassword(null);
         this.dataSource = dataSource;
