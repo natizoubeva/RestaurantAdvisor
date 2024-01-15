@@ -73,7 +73,7 @@ public class User {
     public String toString() {
         return "User{" + "username=" + username + ", name=" + name + ", password=" + password + ", timestamp=" + timestamp + ", isActive=" + isActive + '}';
     }
-
+    
 
     
 }

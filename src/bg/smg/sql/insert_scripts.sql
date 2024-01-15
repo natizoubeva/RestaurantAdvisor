@@ -1,1 +1,2 @@
-INSERT INTO `users`(`username`, `name`, `password`, `is_active`) VALUES ('user1','Vanya', 'cGFzc3dvcmQxMjM0NTY=', 1);
+INSERT INTO `restaurants`( `owner_id`, `name`, `address`, `price_point`) VALUES (1,'Made in Home','ulitsa "Angel KUnchev" 30','MEDIUM');
+INSERT INTO `restaurants`( `owner_id`, `name`, `address`, `price_point`) VALUES (1,'Francoss Pizza','ulitsa "han Asparuh" 27','MEDIUM');
