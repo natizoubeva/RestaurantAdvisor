@@ -34,13 +34,14 @@ public class UserService implements UserServiceI {
         try {
             this.connection = dataSource.getConnection();
             try (PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO `users`(`username`, `name`, `password`, `created`, `is_active`) "
-                    + "VALUES (?, ?, ?, ?, ?)")) {
+                    "INSERT INTO `users`(`username`, `name`, `password`, `created`, `is_active`, `profile_pic`) "
+                    + "VALUES (?, ?, ?, ?, ?, ?)")) {
                 statement.setString(1, user.getUsername());
                 statement.setString(2, user.getName());
                 statement.setString(3, user.getPassword());
                 statement.setString(4, String.valueOf(user.getTimestamp()));
                 statement.setBoolean(5, user.isActive());
+                statement.setString(6, user.getImage());
 
                 int rowsAffected = statement.executeUpdate();
 
@@ -190,7 +191,7 @@ public class UserService implements UserServiceI {
             this.connection = dataSource.getConnection();
             try (PreparedStatement statement = connection.prepareStatement(
                     "UPDATE `users` SET `username`=?, `name`=?, `profile_pic`=? "
-                            + "WHERE `id`=?")) {
+                    + "WHERE `id`=?")) {
                 statement.setString(1, user.getUsername());
                 statement.setString(2, user.getName());
                 statement.setString(3, user.getImage());
@@ -260,12 +261,15 @@ public class UserService implements UserServiceI {
                     "SELECT * FROM `restaurants` WHERE `owner_id`=?")) {
                 statement.setInt(1, user.getId());
 
-                int rowsAffected = statement.executeUpdate();
+                ResultSet resultSet = statement.executeQuery();
 
-                if (rowsAffected == 0) {
-                    user.setRole(Role.USER);
-                    this.changeOwnershipStatus(user);
-                } 
+                if (resultSet.next()) {
+                } else {
+                    if (user.getRole() == Role.OWNER) {
+                        user.setRole(Role.USER);
+                    }
+                    changeOwnershipStatus(user);
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
@@ -280,11 +284,11 @@ public class UserService implements UserServiceI {
                 }
             }
         }
-
     }
 
     @Override
-    public void deleteUser(User user) {
+    public void deleteUser(User user
+    ) {
         try {
             this.connection = dataSource.getConnection();
             try (PreparedStatement statement = connection.prepareStatement(

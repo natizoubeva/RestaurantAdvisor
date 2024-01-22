@@ -174,6 +174,7 @@ public class RestaurantEditFrame extends javax.swing.JFrame {
     private void jButtonSaveChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveChangesActionPerformed
         String name = jTextFieldName.getText();
         String address = jTextFieldAddress.getText();
+        imagePath = jLabelImage.getIcon().toString();
         String image = (imagePath != null) ? imagePath.substring(imagePath.indexOf("resources\\restaurant_images\\") + 28) : null;
         PricePoint pricePoint = (PricePoint)jComboBoxPricePoint.getSelectedItem();
         restaurant.setName(name);

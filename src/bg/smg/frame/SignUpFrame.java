@@ -65,11 +65,9 @@ public class SignUpFrame extends javax.swing.JFrame {
         jLabelSubtitle.setText("Please sign up to continue:");
 
         jLabelUsername.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabelUsername.setForeground(new java.awt.Color(255, 0, 51));
         jLabelUsername.setText("username:");
 
         jLabelPassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabelPassword.setForeground(new java.awt.Color(255, 0, 51));
         jLabelPassword.setText("password:");
 
         jPasswordField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -77,7 +75,6 @@ public class SignUpFrame extends javax.swing.JFrame {
         jPasswordRepeat.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         jLabelPasswordRepeat.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabelPasswordRepeat.setForeground(new java.awt.Color(255, 0, 51));
         jLabelPasswordRepeat.setText("repeat password:");
 
         jButtonSignUp.setBackground(new java.awt.Color(153, 153, 153));
@@ -92,7 +89,6 @@ public class SignUpFrame extends javax.swing.JFrame {
         jTextFieldUsername.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         jLabelName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabelName.setForeground(new java.awt.Color(255, 0, 51));
         jLabelName.setText("name:");
 
         jTextFieldName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -186,6 +182,7 @@ public class SignUpFrame extends javax.swing.JFrame {
             user.setPassword(userService.encode(password));
             user.setTimestamp(new Timestamp(System.currentTimeMillis()));
             user.setActive(true);
+            user.setImage("no_photo.jpg");
             userService.saveUser(user);
             this.setVisible(false);
             MyProfileFrame mpf = new MyProfileFrame(user);

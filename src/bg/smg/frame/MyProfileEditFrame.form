@@ -44,9 +44,9 @@
                   <Component id="jTextFieldName" min="-2" pref="145" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabelInstructions" max="32767" attributes="0"/>
-                  <Component id="jLabelImage" pref="192" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="2" attributes="0">
+                  <Component id="jLabelInstructions" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelImage" alignment="2" min="-2" pref="160" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
           </Group>
@@ -74,7 +74,7 @@
                           <Component id="jTextFieldName" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="jLabelImage" min="-2" pref="161" max="-2" attributes="0"/>
+                  <Component id="jLabelImage" min="-2" pref="160" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabelInstructions" min="-2" max="-2" attributes="0"/>

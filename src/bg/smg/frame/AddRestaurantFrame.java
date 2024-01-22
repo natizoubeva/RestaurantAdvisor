@@ -12,21 +12,22 @@ import bg.smg.model.User;
 import bg.smg.services.RestaurantService;
 import bg.smg.services.UserService;
 import java.awt.Image;
+import java.awt.Window;
 import java.io.File;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.SwingUtilities;
 
 /**
  *
  * @author Natalia
  */
-
-
-
 public class AddRestaurantFrame extends javax.swing.JFrame {
-    
+
     private RestaurantService restaurantService;
     private UserService userService;
     private User user;
@@ -166,9 +167,15 @@ public class AddRestaurantFrame extends javax.swing.JFrame {
     private void jButtonAddNewRestaurantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddNewRestaurantActionPerformed
         String name = jTextFieldName.getText();
         String address = jTextFieldAddress.getText();
-        PricePoint pricePoint = (PricePoint)jComboBoxPricePoint.getSelectedItem();
-        String image = jLabelImage.getIcon().toString();
-        image = image.substring(image.indexOf("resources\\restaurant_images\\") + 28);
+        PricePoint pricePoint = (PricePoint) jComboBoxPricePoint.getSelectedItem();
+        String image = "";
+        if (jLabelImage.getIcon() == null) {
+            image = "no_photo.jpg";
+            
+        } else {
+            image =jLabelImage.getIcon().toString();
+            image = image.substring(image.indexOf("resources\\restaurant_images\\") + 28);
+        }
         Restaurant restaurant = new Restaurant();
         restaurant.setOwnerId(user.getId());
         restaurant.setName(name);
@@ -178,7 +185,8 @@ public class AddRestaurantFrame extends javax.swing.JFrame {
         restaurantService.addNewRestaurant(restaurant);
         user.setRole(Role.OWNER);
         userService.changeOwnershipStatus(user);
-        this.setVisible(false);
+        dispose();
+        
     }//GEN-LAST:event_jButtonAddNewRestaurantActionPerformed
 
     private void jTextFieldNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNameKeyPressed
@@ -213,20 +221,20 @@ public class AddRestaurantFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldAddressFocusGained
 
     private void jLabelImageMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelImageMousePressed
-       JFileChooser fileChooser = new JFileChooser();
-       fileChooser.addChoosableFileFilter(new ImageFilter());
-       fileChooser.setAcceptAllFileFilterUsed(false);
-       
-       int result = fileChooser.showOpenDialog(this);
-       if(result == JFileChooser.APPROVE_OPTION){
-           File selectedFile = fileChooser.getSelectedFile();
-		    ImageIcon imageIcon = new ImageIcon(selectedFile.getAbsolutePath());
-		    Image image = imageIcon.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(),
-			    Image.SCALE_SMOOTH);
-		    imageIcon.setImage(image);
-		    jLabelImage.setIcon(imageIcon);
-		    jLabelImage.setText("");
-       }
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.addChoosableFileFilter(new ImageFilter());
+        fileChooser.setAcceptAllFileFilterUsed(false);
+
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            ImageIcon imageIcon = new ImageIcon(selectedFile.getAbsolutePath());
+            Image image = imageIcon.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(),
+                    Image.SCALE_SMOOTH);
+            imageIcon.setImage(image);
+            jLabelImage.setIcon(imageIcon);
+            jLabelImage.setText("");
+        }
     }//GEN-LAST:event_jLabelImageMousePressed
 
     
@@ -234,36 +242,36 @@ public class AddRestaurantFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-    /* Set the Nimbus look and feel */
-    //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-    /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-     */
-    try {
-        for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-            if ("Nimbus".equals(info.getName())) {
-                javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                break;
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
             }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(AddRestaurantFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(AddRestaurantFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(AddRestaurantFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(AddRestaurantFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-    } catch (ClassNotFoundException ex) {
-        java.util.logging.Logger.getLogger(AddRestaurantFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
-        java.util.logging.Logger.getLogger(AddRestaurantFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-        java.util.logging.Logger.getLogger(AddRestaurantFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-        java.util.logging.Logger.getLogger(AddRestaurantFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    }
-    //</editor-fold>
+        //</editor-fold>
 
-    /* Create and display the form */
-    java.awt.EventQueue.invokeLater(new Runnable() {
-        public void run() {
-            new AddRestaurantFrame().setVisible(true);
-        }
-    });
-}
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new AddRestaurantFrame().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddNewRestaurant;

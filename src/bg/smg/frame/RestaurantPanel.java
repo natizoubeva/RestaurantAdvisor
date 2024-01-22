@@ -7,6 +7,7 @@ package bg.smg.frame;
 import bg.smg.model.Restaurant;
 import bg.smg.model.User;
 import bg.smg.services.RestaurantService;
+import bg.smg.services.UserService;
 import java.awt.Image;
 import java.awt.MediaTracker;
 import java.io.File;
@@ -24,10 +25,11 @@ import javax.swing.SwingUtilities;
  * @author Natalia
  */
 public class RestaurantPanel extends javax.swing.JPanel {
-     
+
     private Restaurant restaurant;
     private User user;
     private RestaurantService restaurantService;
+    private UserService userService;
 
     /**
      * Creates new form RestaurantPanel
@@ -36,13 +38,12 @@ public class RestaurantPanel extends javax.swing.JPanel {
         this.restaurant = restaurant;
         this.user = user;
         restaurantService = new RestaurantService();
+        userService = new UserService();
         initComponents();
         jButtonEdit.setVisible(false);
         jButtonDelete.setVisible(false);
     }
 
-  
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -157,12 +158,14 @@ public class RestaurantPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonDetailsActionPerformed
 
     private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
-        int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete your profile?",
+        int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete your restaurant?",
                 "Confirmation", JOptionPane.YES_NO_OPTION);
         if (result == JOptionPane.YES_OPTION) {
             restaurantService.deleteRestaurant(restaurant);
+            userService.verifyOwnershipStatus(user);
+            this.setVisible(false);
         }
-    
+
     }//GEN-LAST:event_jButtonDeleteActionPerformed
 
     private void jButtonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActionPerformed
@@ -201,8 +204,8 @@ public class RestaurantPanel extends javax.swing.JPanel {
         jLabelRating.setText(restaurant.getRating() + " " + jLabelRating.getText());
 
     }
-    
-    public void setButtonsVisible(){
+
+    public void setButtonsVisible() {
         jButtonDelete.setVisible(true);
         jButtonEdit.setVisible(true);
     }

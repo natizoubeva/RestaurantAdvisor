@@ -38,9 +38,8 @@ public class MyProfileEditFrame extends javax.swing.JFrame {
         initComponents();
         jTextFieldUsername.setText(user.getUsername());
         jTextFieldName.setText(user.getName());
-        System.out.println(user.getImage());
-        if (!user.getImage().isEmpty()) {
-            imagePath = "/resources/profile_images/" + user.getImage();
+        if (user.getImage() != null) {
+            String imagePath = "/resources/profile_images/" + user.getImage();
             URL imageUrl = getClass().getResource(imagePath);
             ImageIcon imageIcon = new ImageIcon(imageUrl);
             SwingUtilities.invokeLater(() -> {
@@ -49,6 +48,8 @@ public class MyProfileEditFrame extends javax.swing.JFrame {
                 jLabelImage.setIcon(imageIcon);
                 jLabelImage.setText("");
             });
+        } else {
+            jLabelImage.setIcon(null);
         }
     }
 
@@ -179,9 +180,9 @@ public class MyProfileEditFrame extends javax.swing.JFrame {
                     .addComponent(jTextFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelInstructions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabelImage, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabelInstructions)
+                    .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(52, 52, 52))
             .addGroup(layout.createSequentialGroup()
                 .addGap(267, 267, 267)
@@ -202,7 +203,7 @@ public class MyProfileEditFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelNText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelInstructions)
                 .addGap(29, 29, 29)
@@ -229,12 +230,12 @@ public class MyProfileEditFrame extends javax.swing.JFrame {
         try {
             String username = jTextFieldUsername.getText();
             String name = jTextFieldName.getText();
-            String image = (imagePath != null) ? imagePath.substring(imagePath.indexOf("resources\\profile_images\\") + 27) : null;
+            String image = (imagePath != null) ? imagePath.substring(imagePath.indexOf("resources\\profile_images\\") + 25) : null;
             user.setUsername(username);
             user.setName(name);
             user.setImage(image);
             userService.updateUser(user);
-            this.setVisible(false);
+            dispose();
             MyProfileFrame mpf = new MyProfileFrame(user);
             mpf.setVisible(true);
         } catch (SQLException ex) {

@@ -62,17 +62,14 @@ public class ForgottenPasswordScreen extends javax.swing.JFrame {
         jLabelSubtitle.setText("Please change it to continue:");
 
         jLabelUsername.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabelUsername.setForeground(new java.awt.Color(255, 0, 51));
         jLabelUsername.setText("username:");
 
         jLabelPasswordNew.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabelPasswordNew.setForeground(new java.awt.Color(255, 0, 51));
         jLabelPasswordNew.setText("new password:");
 
         jPasswordNew.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         jLabelPasswordRepeat.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabelPasswordRepeat.setForeground(new java.awt.Color(255, 0, 51));
         jLabelPasswordRepeat.setText("repeat new password:");
 
         jPasswordRepeatNew.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
