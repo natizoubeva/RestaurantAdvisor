@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author Natalia
  */
 public class LoginScreen extends javax.swing.JFrame {
-
+    
     private UserService userService;
 
     /**
@@ -145,6 +145,7 @@ public class LoginScreen extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+      
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
         try {
@@ -154,6 +155,7 @@ public class LoginScreen extends javax.swing.JFrame {
             User user = userService.getUserByUsername(username);
             
             boolean loginSuccessful = true;
+            
             if (user == null) {
                 loginSuccessful = false;
             } else if (!password.equals(user.getPassword())) {
@@ -161,7 +163,10 @@ public class LoginScreen extends javax.swing.JFrame {
             }
             if (loginSuccessful) {
                 this.setVisible(false);
+                MyProfileFrame mp = new MyProfileFrame(user);
+                mp.setVisible(true);
                 System.out.println("Login successfull");
+                System.out.println(user.toString());
             } else {
                 JOptionPane.showMessageDialog(this,
                         "Моля въведете правилните потребител и парола!",
@@ -175,7 +180,7 @@ public class LoginScreen extends javax.swing.JFrame {
                     JOptionPane.WARNING_MESSAGE);
             Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
 
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
@@ -187,7 +192,7 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private void jButtonSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSignUpActionPerformed
         this.setVisible(false);
-        RegistrationScreen rs = new RegistrationScreen();
+        SignUpFrame rs = new SignUpFrame();
         rs.setVisible(true);
     }//GEN-LAST:event_jButtonSignUpActionPerformed
 

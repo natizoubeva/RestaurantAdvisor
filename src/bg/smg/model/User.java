@@ -11,11 +11,14 @@ import java.sql.Timestamp;
  * @author Natalia
  */
 public class User {
+    private int id;
     private String username;
     private String name;
     private String password;
     private Timestamp timestamp;
     private boolean isActive;
+    private String image;
+    private Role role;
 
     public User() {
         this.username = "";
@@ -28,6 +31,24 @@ public class User {
         this.name = name;
         this.password = password;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+    
+    
 
     public Timestamp getTimestamp() {
         return timestamp;
@@ -69,11 +90,27 @@ public class User {
         this.password=password;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
-        return "User{" + "username=" + username + ", name=" + name + ", password=" + password + ", timestamp=" + timestamp + ", isActive=" + isActive + '}';
+        return "User{" + "id=" + id + ", username=" + username + ", name=" + name + ", password=" + password + ", timestamp=" + timestamp + ", isActive=" + isActive + ", image=" + image + ", role=" + role + '}';
     }
-    
 
+    
     
 }

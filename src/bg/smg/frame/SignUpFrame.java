@@ -17,17 +17,20 @@ import java.sql.Timestamp;
  *
  * @author Natalia
  */
-public class RegistrationScreen extends javax.swing.JFrame {
+public class SignUpFrame extends javax.swing.JFrame {
+
+    private User user;
     private UserService userService;
+
     /**
      * Creates new form RegistrationScreen
      */
-    public RegistrationScreen() {
+    public SignUpFrame() {
         initComponents();
         try {
             userService = new UserService();
         } catch (SQLException ex) {
-            Logger.getLogger(RegistrationScreen.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SignUpFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -165,25 +168,33 @@ public class RegistrationScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSignUpActionPerformed
-        String username = jTextFieldUsername.getText();
-        String name = jTextFieldName.getText();
-        String password = Arrays.toString(jPasswordField.getPassword());
-        String passwordRepeat = Arrays.toString(jPasswordRepeat.getPassword());
-        if(!password.equals(passwordRepeat)){
-            JOptionPane.showMessageDialog(this,
-                    "Повторете правилно паролата си.",
-                    "Грешка!",
-                    JOptionPane.WARNING_MESSAGE);
+        try {
+            String username = jTextFieldUsername.getText();
+            String name = jTextFieldName.getText();
+            String password = Arrays.toString(jPasswordField.getPassword());
+            String passwordRepeat = Arrays.toString(jPasswordRepeat.getPassword());
+            if (!password.equals(passwordRepeat)) {
+                JOptionPane.showMessageDialog(this,
+                        "Повторете правилно паролата си.",
+                        "Грешка!",
+                        JOptionPane.WARNING_MESSAGE);
+
     }//GEN-LAST:event_jButtonSignUpActionPerformed
-        User user = new User();
-        user.setUsername(username);
-        user.setName(name);
-        user.setPassword(userService.encode(password));
-        user.setTimestamp(new Timestamp(System.currentTimeMillis()));
-        user.setActive(true);
-        userService.saveUser(user);
-        this.setVisible(false);
+            user = new User();
+            user.setUsername(username);
+            user.setName(name);
+            user.setPassword(userService.encode(password));
+            user.setTimestamp(new Timestamp(System.currentTimeMillis()));
+            user.setActive(true);
+            userService.saveUser(user);
+            this.setVisible(false);
+            MyProfileFrame mpf = new MyProfileFrame(user);
+            mpf.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(SignUpFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+
     /**
      * @param args the command line arguments
      */
@@ -201,20 +212,21 @@ public class RegistrationScreen extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistrationScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignUpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistrationScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignUpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistrationScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignUpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistrationScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SignUpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RegistrationScreen().setVisible(true);
+                new SignUpFrame().setVisible(true);
             }
         });
     }

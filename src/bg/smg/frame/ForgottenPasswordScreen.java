@@ -152,7 +152,8 @@ public class ForgottenPasswordScreen extends javax.swing.JFrame {
                 user.setPassword(password);
                 userService.updateForgottenPassword(user);
                 this.setVisible(false);
-                
+                LoginScreen ls = new LoginScreen();
+                ls.setVisible(true);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ForgottenPasswordScreen.class.getName()).log(Level.SEVERE, null, ex);

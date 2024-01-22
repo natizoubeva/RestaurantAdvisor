@@ -9,9 +9,7 @@ package bg.smg.model;
  * @author Natalia
  */
 public class Restaurant {
-    
-    private static final String IMAGE_PATH_PREFIX = "/resources/restaurant_images/";
-    
+        
     private int id;
     private int owner_id;
     private String name;
@@ -37,7 +35,7 @@ public class Restaurant {
     public void setId(int id) {
         this.id = id;
     }
-
+    
    
     
     public int getOwnerId() {
@@ -82,11 +80,11 @@ public class Restaurant {
     }
 
     public String getImage() {
-        return IMAGE_PATH_PREFIX + image;
+        return  image;
     }
 
     public void setImage(String image) {
-        this.image = IMAGE_PATH_PREFIX + image;
+        this.image = image;
     }
 
     @Override

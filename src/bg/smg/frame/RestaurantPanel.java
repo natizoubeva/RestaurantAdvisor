@@ -5,22 +5,44 @@
 package bg.smg.frame;
 
 import bg.smg.model.Restaurant;
+import bg.smg.model.User;
+import bg.smg.services.RestaurantService;
 import java.awt.Image;
+import java.awt.MediaTracker;
+import java.io.File;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
  * @author Natalia
  */
 public class RestaurantPanel extends javax.swing.JPanel {
+     
+    private Restaurant restaurant;
+    private User user;
+    private RestaurantService restaurantService;
 
     /**
      * Creates new form RestaurantPanel
      */
-    public RestaurantPanel() {
+    public RestaurantPanel(Restaurant restaurant, User user) throws SQLException {
+        this.restaurant = restaurant;
+        this.user = user;
+        restaurantService = new RestaurantService();
         initComponents();
+        jButtonEdit.setVisible(false);
+        jButtonDelete.setVisible(false);
     }
 
+  
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,57 +55,156 @@ public class RestaurantPanel extends javax.swing.JPanel {
         jLabelImage = new javax.swing.JLabel();
         jLabelName = new javax.swing.JLabel();
         jLabelRating = new javax.swing.JLabel();
+        jLabelStar = new javax.swing.JLabel();
+        jButtonDetails = new javax.swing.JButton();
+        jButtonDelete = new javax.swing.JButton();
+        jButtonEdit = new javax.swing.JButton();
+
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        jLabelImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelImage.setToolTipText("");
+        jLabelImage.setMaximumSize(new java.awt.Dimension(160, 160));
 
         jLabelName.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
 
-        jLabelRating.setText("/ 5 ★");
+        jLabelRating.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jLabelRating.setText("/ 5");
+
+        jLabelStar.setText(" ★");
+
+        jButtonDetails.setBackground(new java.awt.Color(204, 204, 204));
+        jButtonDetails.setText("Details");
+        jButtonDetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDetailsActionPerformed(evt);
+            }
+        });
+
+        jButtonDelete.setBackground(new java.awt.Color(255, 102, 102));
+        jButtonDelete.setText("Delete");
+        jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteActionPerformed(evt);
+            }
+        });
+
+        jButtonEdit.setBackground(new java.awt.Color(153, 204, 255));
+        jButtonEdit.setText("Edit");
+        jButtonEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(132, Short.MAX_VALUE))
+                        .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonDetails, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabelRating)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelStar))
+                            .addComponent(jButtonEdit, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelRating, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31))))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonDelete)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                        .addComponent(jLabelRating, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButtonDetails)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonEdit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonDelete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabelStar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelRating, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 13, Short.MAX_VALUE)))
                 .addContainerGap())
         );
+
+        jLabelImage.setPreferredSize(new java.awt.Dimension(160, 160));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDetailsActionPerformed
+        try {
+            RestaurantDetailsFrame rdf = new RestaurantDetailsFrame(restaurant);
+            rdf.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(RestaurantPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonDetailsActionPerformed
+
+    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+        int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete your profile?",
+                "Confirmation", JOptionPane.YES_NO_OPTION);
+        if (result == JOptionPane.YES_OPTION) {
+            restaurantService.deleteRestaurant(restaurant);
+        }
+    
+    }//GEN-LAST:event_jButtonDeleteActionPerformed
+
+    private void jButtonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActionPerformed
+        try {
+            RestaurantEditFrame ref = new RestaurantEditFrame(user, restaurant);
+            ref.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(RestaurantPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonEditActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonDelete;
+    private javax.swing.JButton jButtonDetails;
+    private javax.swing.JButton jButtonEdit;
     private javax.swing.JLabel jLabelImage;
     private javax.swing.JLabel jLabelName;
     private javax.swing.JLabel jLabelRating;
+    private javax.swing.JLabel jLabelStar;
     // End of variables declaration//GEN-END:variables
 
-    public void setRestaurantPanel(Restaurant restaurant) {
-        ImageIcon imageIcon = new ImageIcon(restaurant.getImage());
-        Image image = imageIcon.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(), Image.SCALE_SMOOTH);
-        imageIcon.setImage(image);
-        jLabelImage.setIcon(imageIcon);
+    public void setRestaurantPanel() {
+        String imagePath = "/resources/restaurant_images/" + restaurant.getImage();
+        URL imageUrl = getClass().getResource(imagePath);
+        ImageIcon imageIcon = new ImageIcon(imageUrl);
+
+        SwingUtilities.invokeLater(() -> {
+            Image image = imageIcon.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(), Image.SCALE_SMOOTH);
+            imageIcon.setImage(image);
+            jLabelImage.setIcon(imageIcon);
+        });
 
         jLabelName.setText(restaurant.getName());
 
         jLabelRating.setText(restaurant.getRating() + " " + jLabelRating.getText());
+
     }
+    
+    public void setButtonsVisible(){
+        jButtonDelete.setVisible(true);
+        jButtonEdit.setVisible(true);
+    }
+
 }

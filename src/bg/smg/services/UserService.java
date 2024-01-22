@@ -4,6 +4,7 @@
  */
 package bg.smg.services;
 
+import bg.smg.model.Role;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import bg.smg.model.User;
@@ -65,7 +66,7 @@ public class UserService implements UserServiceI {
     }
 
     @Override
-    public User getUser(int id) {
+    public User getUserById(int id) {
         try {
             this.connection = dataSource.getConnection();
             try (PreparedStatement statement = connection.prepareStatement(
@@ -74,10 +75,14 @@ public class UserService implements UserServiceI {
                 ResultSet resultSet = statement.executeQuery();
                 resultSet.first();
                 User user = new User();
+                user.setId(resultSet.getInt("id"));
                 user.setUsername(resultSet.getString("username"));
+                user.setName(resultSet.getString("name"));
                 user.setPassword(resultSet.getString("password"));
                 user.setTimestamp(resultSet.getTimestamp("created"));
                 user.setActive(resultSet.getBoolean("is_active"));
+                user.setImage(resultSet.getString("profile_pic"));
+                user.setRole(Role.valueOf(resultSet.getString("role")));
                 return user;
             }
         } catch (SQLException throwables) {
@@ -106,10 +111,14 @@ public class UserService implements UserServiceI {
                 ResultSet resultSet = statement.executeQuery();
                 resultSet.first();
                 User user = new User();
+                user.setId(resultSet.getInt("id"));
                 user.setUsername(resultSet.getString("username"));
+                user.setName(resultSet.getString("name"));
                 user.setPassword(resultSet.getString("password"));
                 user.setTimestamp(resultSet.getTimestamp("created"));
                 user.setActive(resultSet.getBoolean("is_active"));
+                user.setImage(resultSet.getString("profile_pic"));
+                user.setRole(Role.valueOf(resultSet.getString("role")));
                 return user;
             }
         } catch (SQLException throwables) {
@@ -157,6 +166,137 @@ public class UserService implements UserServiceI {
                     System.out.println("User password changed successfully!");
                 } else {
                     System.out.println("Failed to change user password.");
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    System.out.println("Closing database connection...");
+                    connection.close();
+                    System.out.println("Connection valid: " + connection.isValid(5));
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+    }
+
+    @Override
+    public void updateUser(User user) {
+        try {
+            this.connection = dataSource.getConnection();
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE `users` SET `username`=?, `name`=?, `profile_pic`=? "
+                            + "WHERE `id`=?")) {
+                statement.setString(1, user.getUsername());
+                statement.setString(2, user.getName());
+                statement.setString(3, user.getImage());
+                statement.setInt(4, user.getId());
+
+                int rowsAffected = statement.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    System.out.println("User updated successfully!");
+                } else {
+                    System.out.println("Failed to update user information.");
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    System.out.println("Closing database connection...");
+                    connection.close();
+                    System.out.println("Connection valid: " + connection.isValid(5));
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void changeOwnershipStatus(User user) {
+        try {
+            this.connection = dataSource.getConnection();
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "UPDATE `users` SET `role`=?"
+                    + "WHERE `id`=?")) {
+                statement.setString(1, user.getRole().toString());
+                statement.setInt(2, user.getId());
+
+                int rowsAffected = statement.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    System.out.println("User role updated successfully!");
+                } else {
+                    System.out.println("Failed to update user role.");
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    System.out.println("Closing database connection...");
+                    connection.close();
+                    System.out.println("Connection valid: " + connection.isValid(5));
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void verifyOwnershipStatus(User user) {
+        try {
+            this.connection = dataSource.getConnection();
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "SELECT * FROM `restaurants` WHERE `owner_id`=?")) {
+                statement.setInt(1, user.getId());
+
+                int rowsAffected = statement.executeUpdate();
+
+                if (rowsAffected == 0) {
+                    user.setRole(Role.USER);
+                    this.changeOwnershipStatus(user);
+                } 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (connection != null) {
+                try {
+                    System.out.println("Closing database connection...");
+                    connection.close();
+                    System.out.println("Connection valid: " + connection.isValid(5));
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+    }
+
+    @Override
+    public void deleteUser(User user) {
+        try {
+            this.connection = dataSource.getConnection();
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "DELETE FROM `users` WHERE `id`=?")) {
+                statement.setInt(1, user.getId());
+
+                int rowsAffected = statement.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    System.out.println("User deleted successfully!");
+                } else {
+                    System.out.println("Failed to delete user.");
                 }
             }
         } catch (SQLException ex) {

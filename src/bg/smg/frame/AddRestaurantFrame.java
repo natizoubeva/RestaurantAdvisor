@@ -4,7 +4,19 @@
  */
 package bg.smg.frame;
 
+import bg.smg.util.ImageFilter;
+import bg.smg.model.Restaurant;
+import bg.smg.model.PricePoint;
+import bg.smg.model.Role;
+import bg.smg.model.User;
+import bg.smg.services.RestaurantService;
+import bg.smg.services.UserService;
+import java.awt.Image;
+import java.io.File;
+import java.sql.SQLException;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -14,12 +26,22 @@ import javax.swing.DefaultComboBoxModel;
 
 
 public class AddRestaurantFrame extends javax.swing.JFrame {
+    
+    private RestaurantService restaurantService;
+    private UserService userService;
+    private User user;
 
     /**
      * Creates new form AddRestaurantFrame
      */
-    public AddRestaurantFrame() {
+    public AddRestaurantFrame(User user) throws SQLException {
         initComponents();
+        this.user = user;
+        restaurantService = new RestaurantService();
+        userService = new UserService();
+    }
+
+    private AddRestaurantFrame() {
     }
 
     /**
@@ -38,13 +60,18 @@ public class AddRestaurantFrame extends javax.swing.JFrame {
         jButtonAddNewRestaurant = new javax.swing.JButton();
         jComboBoxPricePoint = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabelImage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabelImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelImage.setText("Click here to upload image");
         jLabelImage.setToolTipText("");
         jLabelImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabelImage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabelImageMousePressed(evt);
+            }
+        });
 
         jTextFieldName.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
         jTextFieldName.setText("Enter the restaurant's name");
@@ -91,7 +118,7 @@ public class AddRestaurantFrame extends javax.swing.JFrame {
         });
 
         jComboBoxPricePoint.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jComboBoxPricePoint.setModel(new DefaultComboBoxModel<>(bg.smg.model.PricePoint.values()));
+        jComboBoxPricePoint.setModel(new DefaultComboBoxModel(bg.smg.model.PricePoint.values()));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,10 +126,13 @@ public class AddRestaurantFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldName)
-                    .addComponent(jTextFieldAddress)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 138, Short.MAX_VALUE)
+                        .addComponent(jButtonAddNewRestaurant))
+                    .addComponent(jTextFieldName, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldAddress, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabelPricePoint)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBoxPricePoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -110,10 +140,6 @@ public class AddRestaurantFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(143, 143, 143)
-                .addComponent(jButtonAddNewRestaurant)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,16 +155,30 @@ public class AddRestaurantFrame extends javax.swing.JFrame {
                             .addComponent(jLabelPricePoint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jComboBoxPricePoint, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)))
                     .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(jButtonAddNewRestaurant, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(37, 37, 37))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAddNewRestaurantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddNewRestaurantActionPerformed
-        // TODO add your handling code here:
+        String name = jTextFieldName.getText();
+        String address = jTextFieldAddress.getText();
+        PricePoint pricePoint = (PricePoint)jComboBoxPricePoint.getSelectedItem();
+        String image = jLabelImage.getIcon().toString();
+        image = image.substring(image.indexOf("resources\\restaurant_images\\") + 28);
+        Restaurant restaurant = new Restaurant();
+        restaurant.setOwnerId(user.getId());
+        restaurant.setName(name);
+        restaurant.setAddress(address);
+        restaurant.setPricePoint(pricePoint);
+        restaurant.setImage(image);
+        restaurantService.addNewRestaurant(restaurant);
+        user.setRole(Role.OWNER);
+        userService.changeOwnershipStatus(user);
+        this.setVisible(false);
     }//GEN-LAST:event_jButtonAddNewRestaurantActionPerformed
 
     private void jTextFieldNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNameKeyPressed
@@ -171,6 +211,23 @@ public class AddRestaurantFrame extends javax.swing.JFrame {
     private void jTextFieldAddressFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldAddressFocusGained
         jTextFieldAddress.setCaretPosition(0);
     }//GEN-LAST:event_jTextFieldAddressFocusGained
+
+    private void jLabelImageMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelImageMousePressed
+       JFileChooser fileChooser = new JFileChooser();
+       fileChooser.addChoosableFileFilter(new ImageFilter());
+       fileChooser.setAcceptAllFileFilterUsed(false);
+       
+       int result = fileChooser.showOpenDialog(this);
+       if(result == JFileChooser.APPROVE_OPTION){
+           File selectedFile = fileChooser.getSelectedFile();
+		    ImageIcon imageIcon = new ImageIcon(selectedFile.getAbsolutePath());
+		    Image image = imageIcon.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(),
+			    Image.SCALE_SMOOTH);
+		    imageIcon.setImage(image);
+		    jLabelImage.setIcon(imageIcon);
+		    jLabelImage.setText("");
+       }
+    }//GEN-LAST:event_jLabelImageMousePressed
 
     
     /**

@@ -5,7 +5,7 @@
 package bg.smg.services;
 
 import bg.smg.model.Restaurant;
-import java.awt.List;
+import bg.smg.model.User;
 import java.util.ArrayList;
 
 /**
@@ -14,4 +14,8 @@ import java.util.ArrayList;
  */
 public interface RestaurantServiceI {
     public ArrayList<Restaurant> getAll();
+    public void addNewRestaurant(Restaurant restaurant);
+    public ArrayList<Restaurant> getRestaurantsForUser(User user);
+    public void updateRestaurant(Restaurant restaurant, User owner);
+    public void deleteRestaurant(Restaurant restaurant);
 }
