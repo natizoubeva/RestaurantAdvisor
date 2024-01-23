@@ -63,8 +63,8 @@ public class LoginScreen extends javax.swing.JFrame {
         jLabelPassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelPassword.setText("password:");
 
-        jButtonLogin.setBackground(new java.awt.Color(153, 204, 255));
-        jButtonLogin.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        jButtonLogin.setBackground(new java.awt.Color(175, 197, 220));
+        jButtonLogin.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jButtonLogin.setForeground(new java.awt.Color(255, 255, 255));
         jButtonLogin.setText("Login");
         jButtonLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -75,7 +75,7 @@ public class LoginScreen extends javax.swing.JFrame {
 
         jPasswordField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        jButtonForgottenPassword.setBackground(new java.awt.Color(204, 204, 204));
+        jButtonForgottenPassword.setBackground(new java.awt.Color(242, 242, 242));
         jButtonForgottenPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButtonForgottenPassword.setText("Forgot your password?");
         jButtonForgottenPassword.addActionListener(new java.awt.event.ActionListener() {
@@ -86,8 +86,9 @@ public class LoginScreen extends javax.swing.JFrame {
 
         jTextFieldUsername.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        jButtonSignUp.setBackground(new java.awt.Color(153, 153, 153));
-        jButtonSignUp.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButtonSignUp.setBackground(new java.awt.Color(171, 214, 186));
+        jButtonSignUp.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButtonSignUp.setForeground(new java.awt.Color(255, 255, 255));
         jButtonSignUp.setText("Sign Up");
         jButtonSignUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

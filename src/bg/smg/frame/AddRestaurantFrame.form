@@ -27,7 +27,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="0" pref="138" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="179" max="32767" attributes="0"/>
                       <Component id="jButtonAddNewRestaurant" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jTextFieldName" alignment="0" max="32767" attributes="0"/>
@@ -104,7 +104,7 @@
     <Component class="javax.swing.JTextField" name="jTextFieldAddress">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="2"/>
+          <Font name="Segoe UI" size="16" style="2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Enter the restaurant&apos;s address"/>
       </Properties>
@@ -117,7 +117,7 @@
     <Component class="javax.swing.JLabel" name="jLabelPricePoint">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="2"/>
+          <Font name="Segoe UI" size="16" style="2"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Choose the price point:"/>
       </Properties>
@@ -125,10 +125,10 @@
     <Component class="javax.swing.JButton" name="jButtonAddNewRestaurant">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="cc" red="99" type="rgb"/>
+          <Color blue="dc" green="c5" red="af" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="22" style="1"/>
+          <Font name="Segoe UI" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Add New Restaurant"/>
       </Properties>

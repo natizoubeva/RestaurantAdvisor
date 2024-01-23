@@ -136,11 +136,14 @@ public class MyProfileEditFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabelNText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabelNText.setText("Name:");
 
+        jLabelUNText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabelUNText.setText("Username:");
 
-        jButtonSaveChanges.setBackground(new java.awt.Color(204, 255, 204));
+        jButtonSaveChanges.setBackground(new java.awt.Color(175, 220, 189));
+        jButtonSaveChanges.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonSaveChanges.setText("Save Changes");
         jButtonSaveChanges.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,7 +154,12 @@ public class MyProfileEditFrame extends javax.swing.JFrame {
         jLabelInstructions.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelInstructions.setText("Click on the profile pic to change it");
 
-        jButtonDelete.setBackground(new java.awt.Color(255, 102, 102));
+        jTextFieldUsername.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jTextFieldName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jButtonDelete.setBackground(new java.awt.Color(227, 146, 146));
+        jButtonDelete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButtonDelete.setText("Delete user");
         jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,7 +218,7 @@ public class MyProfileEditFrame extends javax.swing.JFrame {
                 .addComponent(jButtonSaveChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonDelete)
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

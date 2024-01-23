@@ -127,7 +127,7 @@
     <Component class="javax.swing.JButton" name="jButtonDelete">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="66" green="66" red="ff" type="rgb"/>
+          <Color blue="92" green="92" red="e3" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Delete"/>
       </Properties>
@@ -138,7 +138,7 @@
     <Component class="javax.swing.JButton" name="jButtonEdit">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="cc" red="99" type="rgb"/>
+          <Color blue="dc" green="c5" red="af" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Edit"/>
       </Properties>

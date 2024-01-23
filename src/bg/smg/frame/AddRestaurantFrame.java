@@ -90,7 +90,7 @@ public class AddRestaurantFrame extends javax.swing.JFrame {
             }
         });
 
-        jTextFieldAddress.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jTextFieldAddress.setFont(new java.awt.Font("Segoe UI", 2, 16)); // NOI18N
         jTextFieldAddress.setText("Enter the restaurant's address");
         jTextFieldAddress.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -106,11 +106,11 @@ public class AddRestaurantFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabelPricePoint.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        jLabelPricePoint.setFont(new java.awt.Font("Segoe UI", 2, 16)); // NOI18N
         jLabelPricePoint.setText("Choose the price point:");
 
-        jButtonAddNewRestaurant.setBackground(new java.awt.Color(153, 204, 255));
-        jButtonAddNewRestaurant.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        jButtonAddNewRestaurant.setBackground(new java.awt.Color(175, 197, 220));
+        jButtonAddNewRestaurant.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonAddNewRestaurant.setText("Add New Restaurant");
         jButtonAddNewRestaurant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,7 +129,7 @@ public class AddRestaurantFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 138, Short.MAX_VALUE)
+                        .addGap(0, 179, Short.MAX_VALUE)
                         .addComponent(jButtonAddNewRestaurant))
                     .addComponent(jTextFieldName, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldAddress, javax.swing.GroupLayout.Alignment.LEADING)

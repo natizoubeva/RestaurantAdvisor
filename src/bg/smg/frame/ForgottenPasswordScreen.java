@@ -74,8 +74,8 @@ public class ForgottenPasswordScreen extends javax.swing.JFrame {
 
         jPasswordRepeatNew.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
-        jButtonChangePassword.setBackground(new java.awt.Color(153, 153, 153));
-        jButtonChangePassword.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        jButtonChangePassword.setBackground(new java.awt.Color(175, 197, 220));
+        jButtonChangePassword.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jButtonChangePassword.setText("Change Password");
         jButtonChangePassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,7 +128,7 @@ public class ForgottenPasswordScreen extends javax.swing.JFrame {
                 .addComponent(jPasswordRepeatNew, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonChangePassword)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();

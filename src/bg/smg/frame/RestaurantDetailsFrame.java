@@ -75,6 +75,10 @@ public class RestaurantDetailsFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jLabelName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jLabelAddress.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
         jLabelOwner.setForeground(new java.awt.Color(102, 102, 102));
         jLabelOwner.setText("Owner: ");
 
@@ -100,7 +104,8 @@ public class RestaurantDetailsFrame extends javax.swing.JFrame {
 
         jScrollPaneReviews.setViewportView(jPanelReviews);
 
-        jButtonWriteReview.setBackground(new java.awt.Color(153, 204, 255));
+        jButtonWriteReview.setBackground(new java.awt.Color(175, 197, 220));
+        jButtonWriteReview.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jButtonWriteReview.setText("+ Write a Review");
         jButtonWriteReview.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

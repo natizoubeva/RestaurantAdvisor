@@ -99,7 +99,8 @@ public class RestaurantEditFrame extends javax.swing.JFrame {
         jComboBoxPricePoint.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jComboBoxPricePoint.setModel(new DefaultComboBoxModel(bg.smg.model.PricePoint.values()));
 
-        jButtonSaveChanges.setBackground(new java.awt.Color(204, 255, 204));
+        jButtonSaveChanges.setBackground(new java.awt.Color(175, 220, 189));
+        jButtonSaveChanges.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonSaveChanges.setText("Save Changes");
         jButtonSaveChanges.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

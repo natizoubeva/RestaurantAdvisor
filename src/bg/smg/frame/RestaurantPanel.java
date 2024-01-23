@@ -82,7 +82,7 @@ public class RestaurantPanel extends javax.swing.JPanel {
             }
         });
 
-        jButtonDelete.setBackground(new java.awt.Color(255, 102, 102));
+        jButtonDelete.setBackground(new java.awt.Color(227, 146, 146));
         jButtonDelete.setText("Delete");
         jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,7 +90,7 @@ public class RestaurantPanel extends javax.swing.JPanel {
             }
         });
 
-        jButtonEdit.setBackground(new java.awt.Color(153, 204, 255));
+        jButtonEdit.setBackground(new java.awt.Color(175, 197, 220));
         jButtonEdit.setText("Edit");
         jButtonEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

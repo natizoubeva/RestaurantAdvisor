@@ -77,8 +77,8 @@ public class SignUpFrame extends javax.swing.JFrame {
         jLabelPasswordRepeat.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelPasswordRepeat.setText("repeat password:");
 
-        jButtonSignUp.setBackground(new java.awt.Color(153, 153, 153));
-        jButtonSignUp.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        jButtonSignUp.setBackground(new java.awt.Color(175, 197, 220));
+        jButtonSignUp.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButtonSignUp.setText("Sign Up");
         jButtonSignUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

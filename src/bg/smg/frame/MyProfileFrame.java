@@ -142,11 +142,18 @@ public class MyProfileFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabelUNText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabelUNText.setText("Username:");
 
+        jLabelNText.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabelNText.setText("Name:");
 
-        jButtonAddNewRestaurant.setBackground(new java.awt.Color(153, 204, 255));
+        jLabelUsername.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jLabelName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jButtonAddNewRestaurant.setBackground(new java.awt.Color(175, 197, 220));
+        jButtonAddNewRestaurant.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButtonAddNewRestaurant.setText("Add My Restauant");
         jButtonAddNewRestaurant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,6 +161,9 @@ public class MyProfileFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabelJoinedOn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jLabelUserSince.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabelUserSince.setText("User since:");
 
         jScrollPaneMyRestaurants.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
