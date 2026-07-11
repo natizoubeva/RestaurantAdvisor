@@ -1,4 +1,5 @@
 create database restaurant_advisor;
+use restaurant_advisor;
 
 create table users (
 id int not null primary key auto_increment,
