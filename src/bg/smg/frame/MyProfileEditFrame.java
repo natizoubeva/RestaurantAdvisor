@@ -27,7 +27,7 @@ public class MyProfileEditFrame extends javax.swing.JFrame {
     private User user;
     private UserService userService;
 
-    private String imagePath;
+    private String imageName;
 
     /**
      * Creates new form MyProfileEditFrame
@@ -38,8 +38,9 @@ public class MyProfileEditFrame extends javax.swing.JFrame {
         initComponents();
         jTextFieldUsername.setText(user.getUsername());
         jTextFieldName.setText(user.getName());
+        imageName = user.getImage();
         if (user.getImage() != null) {
-            String imagePath = "/resources/profile_images/" + user.getImage();
+            String imagePath = "/resources/profile_images/" + imageName;
             URL imageUrl = getClass().getResource(imagePath);
             ImageIcon imageIcon = new ImageIcon(imageUrl);
             SwingUtilities.invokeLater(() -> {
@@ -238,10 +239,9 @@ public class MyProfileEditFrame extends javax.swing.JFrame {
         try {
             String username = jTextFieldUsername.getText();
             String name = jTextFieldName.getText();
-            String image = (imagePath != null) ? imagePath.substring(imagePath.indexOf("resources\\profile_images\\") + 25) : null;
             user.setUsername(username);
             user.setName(name);
-            user.setImage(image);
+            user.setImage(imageName);
             userService.updateUser(user);
             dispose();
             MyProfileFrame mpf = new MyProfileFrame(user);
@@ -269,8 +269,8 @@ public class MyProfileEditFrame extends javax.swing.JFrame {
         int result = fileChooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
-            imagePath = selectedFile.getAbsolutePath();
-            ImageIcon imageIcon = new ImageIcon(imagePath);
+            imageName = selectedFile.getName();
+            ImageIcon imageIcon = new ImageIcon(selectedFile.getAbsolutePath());
             Image image = imageIcon.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(), Image.SCALE_SMOOTH);
             imageIcon.setImage(image);
             jLabelImage.setIcon(imageIcon);
