@@ -147,12 +147,12 @@ public class RestaurantService implements RestaurantServiceI {
             this.connection = dataSource.getConnection();
             try (PreparedStatement statement = connection.prepareStatement(
                     "UPDATE `restaurants` SET `name`=?,`address`=?,`price_point`=?,`image`=?"
-                    + "WHERE `owner_id`=?")) {
+                    + "WHERE `id`=?")) {
                 statement.setString(1, restaurant.getName());
                 statement.setString(2, restaurant.getAddress());
                 statement.setString(3, restaurant.getPricePoint().toString());
                 statement.setString(4, restaurant.getImage());
-                statement.setInt(5, owner.getId());
+                statement.setInt(5, restaurant.getId());
 
                 int rowsAffected = statement.executeUpdate();
 

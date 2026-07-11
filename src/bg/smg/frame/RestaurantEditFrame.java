@@ -31,7 +31,7 @@ public class RestaurantEditFrame extends javax.swing.JFrame {
     private Restaurant restaurant;
     private RestaurantService restaurantService;
     
-    private String imagePath;
+    private String imageName;
     /**
      * Creates new form RestaurantEditFrame
      */
@@ -42,7 +42,8 @@ public class RestaurantEditFrame extends javax.swing.JFrame {
         initComponents();
         jTextFieldName.setText(restaurant.getName());
         jTextFieldAddress.setText(restaurant.getAddress());
-        imagePath = "/resources/restaurant_images/" + restaurant.getImage();
+        imageName = restaurant.getImage();
+        String imagePath = "/resources/restaurant_images/" + imageName;
         URL imageUrl = getClass().getResource(imagePath);
         ImageIcon imageIcon = new ImageIcon(imageUrl);
         SwingUtilities.invokeLater(() -> {
@@ -163,6 +164,7 @@ public class RestaurantEditFrame extends javax.swing.JFrame {
         int result = fileChooser.showOpenDialog(this);
         if(result == JFileChooser.APPROVE_OPTION){
             File selectedFile = fileChooser.getSelectedFile();
+            imageName = selectedFile.getName();
             ImageIcon imageIcon = new ImageIcon(selectedFile.getAbsolutePath());
             Image image = imageIcon.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(),
                 Image.SCALE_SMOOTH);
@@ -175,51 +177,14 @@ public class RestaurantEditFrame extends javax.swing.JFrame {
     private void jButtonSaveChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveChangesActionPerformed
         String name = jTextFieldName.getText();
         String address = jTextFieldAddress.getText();
-        imagePath = jLabelImage.getIcon().toString();
-        String image = (imagePath != null) ? imagePath.substring(imagePath.indexOf("resources\\restaurant_images\\") + 28) : null;
         PricePoint pricePoint = (PricePoint)jComboBoxPricePoint.getSelectedItem();
         restaurant.setName(name);
         restaurant.setAddress(address);
-        restaurant.setImage(image);
+        restaurant.setImage(imageName);
         restaurant.setPricePoint(pricePoint);
         restaurantService.updateRestaurant(restaurant, user);
         this.setVisible(false);
     }//GEN-LAST:event_jButtonSaveChangesActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RestaurantEditFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RestaurantEditFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RestaurantEditFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RestaurantEditFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RestaurantEditFrame().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonSaveChanges;

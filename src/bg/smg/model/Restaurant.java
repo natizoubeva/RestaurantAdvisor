@@ -35,9 +35,7 @@ public class Restaurant {
     public void setId(int id) {
         this.id = id;
     }
-    
-   
-    
+
     public int getOwnerId() {
         return owner_id;
     }
@@ -69,7 +67,6 @@ public class Restaurant {
     public double getRating() {
         return rating;
     }
-
 
     public PricePoint getPricePoint() {
         return price_point;

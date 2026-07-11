@@ -32,6 +32,8 @@ public class AddRestaurantFrame extends javax.swing.JFrame {
     private UserService userService;
     private User user;
 
+    private String imageName = "";
+
     /**
      * Creates new form AddRestaurantFrame
      */
@@ -171,17 +173,15 @@ public class AddRestaurantFrame extends javax.swing.JFrame {
         String image = "";
         if (jLabelImage.getIcon() == null) {
             image = "no_photo.jpg";
-            
         } else {
-            image =jLabelImage.getIcon().toString();
-            image = image.substring(image.indexOf("resources\\restaurant_images\\") + 28);
+            image = imageName;
         }
         Restaurant restaurant = new Restaurant();
         restaurant.setOwnerId(user.getId());
         restaurant.setName(name);
         restaurant.setAddress(address);
         restaurant.setPricePoint(pricePoint);
-        restaurant.setImage(image);
+        restaurant.setImage(imageName);
         restaurantService.addNewRestaurant(restaurant);
         user.setRole(Role.OWNER);
         userService.changeOwnershipStatus(user);
@@ -228,6 +228,7 @@ public class AddRestaurantFrame extends javax.swing.JFrame {
         int result = fileChooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
+            imageName = selectedFile.getName();
             ImageIcon imageIcon = new ImageIcon(selectedFile.getAbsolutePath());
             Image image = imageIcon.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(),
                     Image.SCALE_SMOOTH);
@@ -237,41 +238,6 @@ public class AddRestaurantFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabelImageMousePressed
 
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddRestaurantFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddRestaurantFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddRestaurantFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddRestaurantFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AddRestaurantFrame().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddNewRestaurant;
